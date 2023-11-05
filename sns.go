@@ -1,14 +1,18 @@
 package sns
 
-import namehash "github.com/Taoist-Labs/sns-go-namehash"
-import safe "github.com/Taoist-Labs/sns-go-safe"
-import api "github.com/Taoist-Labs/sns-go-api"
+import (
+	api "github.com/Taoist-Labs/sns-go-api"
+	namehash "github.com/Taoist-Labs/sns-go-namehash"
+	safe "github.com/Taoist-Labs/sns-go-safe"
+)
 
-func Resolve(sns string) (addr string) {
+// Resolve sns to address
+// parameter 'sns' example: 'abc.seedao' 'sub.abc.seedao'
+func Resolve(sns string) string {
 	return ResolveWithRPC(sns, api.RPC)
 }
 
-func ResolveWithRPC(sns, rpc string) (addr string) {
+func ResolveWithRPC(sns, rpc string) string {
 	if len(sns) == 0 {
 		return "0x0000000000000000000000000000000000000000" // sns is empty
 	}
@@ -25,6 +29,30 @@ func ResolveWithRPC(sns, rpc string) (addr string) {
 	return api.ResolveWithRPC(name, rpc)
 }
 
+func Resolves(sns []string) []string {
+	return ResolvesWithRPC(sns, api.RPC)
+}
+
+func ResolvesWithRPC(sns []string, rpc string) []string {
+	if len(sns) == 0 {
+		return []string{}
+	}
+
+	var names []string
+	for _, s := range sns {
+		ok, n := namehash.Normalize(s)
+		if ok && safe.IsSafe(n) {
+			names = append(names, n)
+		} else {
+			names = append(names, "")
+		}
+	}
+
+	return api.Resolves(names)
+}
+
+// Name address to sns
+// return addr example: 'abc.seedao' 'sub.abc.seedao'
 func Name(addr string) (sns string) {
 	return NameWithRPC(addr, api.RPC)
 }
@@ -44,4 +72,18 @@ func NameWithRPC(addr, rpc string) (sns string) {
 	}
 
 	return name
+}
+
+func Names(addr []string) []string {
+	return NamesWithRPC(addr, api.RPC)
+}
+
+func NamesWithRPC(addr []string, rpc string) []string {
+	if len(addr) == 0 {
+		return []string{}
+	}
+
+	sns := api.Names(addr)
+
+	return safe.Safe(sns)
 }
