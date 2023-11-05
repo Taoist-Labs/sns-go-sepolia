@@ -4,12 +4,12 @@ github.com/Microsoft/go-winio v0.6.1 h1:9/kr64B9VUZrLm5YYwbGtUJnMgqWVOdUAXu6Migc
 github.com/Microsoft/go-winio v0.6.1/go.mod h1:LRdKpFKfdobln8UmuiYcKPot9D2v6svN5+sAH+4kjUM=
 github.com/StackExchange/wmi v1.2.1 h1:VIkavFPXSjcnS+O8yTq7NI32k0R5Aj+v39y29VYDOSA=
 github.com/StackExchange/wmi v1.2.1/go.mod h1:rcmrprowKIVzvc+NUiLncP2uuArMWLCbu9SBzvHz7e8=
-github.com/Taoist-Labs/sns-go-api v0.2.0 h1:I8QCiHOsd15g0gdOi0O8qN5EiC5H6gWnAjvHxw24hfw=
-github.com/Taoist-Labs/sns-go-api v0.2.0/go.mod h1:kz8hMJDMqRRVZV9fIUxp4GVSE5/uVXkvSjbh0JV5PVY=
+github.com/Taoist-Labs/sns-go-api v0.1.1 h1:cPGvu9ctw6tNbX4bUQbwMPlbMN6PyciHfuhfiKUXa/k=
+github.com/Taoist-Labs/sns-go-api v0.1.1/go.mod h1:kz8hMJDMqRRVZV9fIUxp4GVSE5/uVXkvSjbh0JV5PVY=
 github.com/Taoist-Labs/sns-go-namehash v0.1.0 h1:5a1PKB7pAtBhb0o64pwrV+enHEfVm7AgipXzy8B59U4=
 github.com/Taoist-Labs/sns-go-namehash v0.1.0/go.mod h1:53v+oKUyKhjZAoASElIc65Y07GVAct80mczBycJoqzA=
-github.com/Taoist-Labs/sns-go-safe v0.1.0 h1:K4XXW/EnoDi8b6sWxX3wPfJC0OOZOfc/FGQazkMRD4Y=
-github.com/Taoist-Labs/sns-go-safe v0.1.0/go.mod h1:Wg5pvhXxdUy+ps8+HUZBFKhiRvv4RpKbY/srNAKsIlQ=
+github.com/Taoist-Labs/sns-go-safe v0.1.2 h1:ukCwxhCI5tvrkxQ5IHdXKJJG5H8spfnU3f4hcQErlK0=
+github.com/Taoist-Labs/sns-go-safe v0.1.2/go.mod h1:5iN3Pabv/C6Upx+cGspaGwurgw9PjuLmEQhGJqdq8Jk=
 github.com/VictoriaMetrics/fastcache v1.12.1 h1:i0mICQuojGDL3KblA7wUNlY5lOK6a4bwt3uRKnkZU40=
 github.com/VictoriaMetrics/fastcache v1.12.1/go.mod h1:tX04vaqcNoQeGLD+ra5pU5sWkuxnzWhEzLwhP9w653o=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=

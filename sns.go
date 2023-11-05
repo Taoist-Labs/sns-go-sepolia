@@ -9,7 +9,7 @@ import (
 // Resolve sns to address
 // parameter 'sns' example: 'abc.seedao' 'sub.abc.seedao'
 func Resolve(sns string) string {
-	return ResolveWithRPC(sns, api.RPC)
+	return ResolveWithRPC(sns, rpc)
 }
 
 func ResolveWithRPC(sns, rpc string) string {
@@ -22,15 +22,15 @@ func ResolveWithRPC(sns, rpc string) string {
 		return "0x0000000000000000000000000000000000000000" // sns is empty
 	}
 
-	if !safe.IsSafe(name) {
+	if !safe.IsSafe(name, safeHost) {
 		return "0x0000000000000000000000000000000000000000" // sns is empty
 	}
 
-	return api.ResolveWithRPC(name, rpc)
+	return api.Resolve(name, publicResolverAddr, rpc)
 }
 
 func Resolves(sns []string) []string {
-	return ResolvesWithRPC(sns, api.RPC)
+	return ResolvesWithRPC(sns, rpc)
 }
 
 func ResolvesWithRPC(sns []string, rpc string) []string {
@@ -41,20 +41,20 @@ func ResolvesWithRPC(sns []string, rpc string) []string {
 	var names []string
 	for _, s := range sns {
 		ok, n := namehash.Normalize(s)
-		if ok && safe.IsSafe(n) {
+		if ok && safe.IsSafe(n, safeHost) {
 			names = append(names, n)
 		} else {
 			names = append(names, "")
 		}
 	}
 
-	return api.Resolves(names)
+	return api.Resolves(names, publicResolverAddr, rpc)
 }
 
 // Name address to sns
 // return addr example: 'abc.seedao' 'sub.abc.seedao'
 func Name(addr string) (sns string) {
-	return NameWithRPC(addr, api.RPC)
+	return NameWithRPC(addr, rpc)
 }
 
 func NameWithRPC(addr, rpc string) (sns string) {
@@ -62,12 +62,12 @@ func NameWithRPC(addr, rpc string) (sns string) {
 		return "" // address is empty
 	}
 
-	name := api.NameWithRPC(addr, rpc)
+	name := api.Name(addr, publicResolverAddr, rpc)
 	if len(name) == 0 {
 		return "" // address is empty
 	}
 
-	if !safe.IsSafe(name) {
+	if !safe.IsSafe(name, safeHost) {
 		return "" // address is empty
 	}
 
@@ -75,7 +75,7 @@ func NameWithRPC(addr, rpc string) (sns string) {
 }
 
 func Names(addr []string) []string {
-	return NamesWithRPC(addr, api.RPC)
+	return NamesWithRPC(addr, rpc)
 }
 
 func NamesWithRPC(addr []string, rpc string) []string {
@@ -83,7 +83,7 @@ func NamesWithRPC(addr []string, rpc string) []string {
 		return []string{}
 	}
 
-	sns := api.Names(addr)
+	sns := api.Names(addr, publicResolverAddr, rpc)
 
-	return safe.Safe(sns)
+	return safe.Safe(sns, safeHost)
 }
