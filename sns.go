@@ -26,7 +26,7 @@ func ResolveWithRPC(sns, rpc string) string {
 		return "0x0000000000000000000000000000000000000000" // sns is empty
 	}
 
-	return api.Resolve(name, publicResolverAddr, rpc)
+	return api.Resolve(name, indexerHost, rpc, publicResolverAddr)
 }
 
 func Resolves(sns []string) []string {
@@ -48,7 +48,7 @@ func ResolvesWithRPC(sns []string, rpc string) []string {
 		}
 	}
 
-	return api.Resolves(names, publicResolverAddr, rpc)
+	return api.Resolves(names, indexerHost, rpc, publicResolverAddr)
 }
 
 // Name address to sns
@@ -62,7 +62,7 @@ func NameWithRPC(addr, rpc string) (sns string) {
 		return "" // address is empty
 	}
 
-	name := api.Name(addr, publicResolverAddr, rpc)
+	name := api.Name(addr, indexerHost, rpc, publicResolverAddr)
 	if len(name) == 0 {
 		return "" // address is empty
 	}
@@ -83,7 +83,7 @@ func NamesWithRPC(addr []string, rpc string) []string {
 		return []string{}
 	}
 
-	sns := api.Names(addr, publicResolverAddr, rpc)
+	sns := api.Names(addr, indexerHost, rpc, publicResolverAddr)
 
 	return safe.Safe(sns, safeHost)
 }
