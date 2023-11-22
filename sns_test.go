@@ -2,6 +2,11 @@ package sns
 
 import "testing"
 
+const testIndexerHost = "http://localhost:3000"
+const testSafeHost = "http://localhost:8090"
+const testRPC = "https://eth-sepolia.g.alchemy.com/v2/H43zK7UnIN2v7u2ZoTbizIPnXkylKIZl"
+const testPublicResolverAddr = "0x4ffCfd37C362B415E4c4A607815f5dB6A297Ed8A"
+
 func TestResolve(t *testing.T) {
 	tests := []struct {
 		name string
@@ -45,10 +50,18 @@ func TestResolve(t *testing.T) {
 		},
 	}
 
+	// Query Indexer Success
 	for _, tt := range tests {
-		got := Resolve(tt.sns)
+		got := resolve(tt.sns, testSafeHost, testIndexerHost, "", "")
 		if got != tt.want {
-			t.Errorf("Resolve(%s)'s result: %v, want: %v", tt.sns, got, tt.want)
+			t.Errorf("Query Indexer Success: resolve(%s)'s result: %v, want: %v", tt.sns, got, tt.want)
+		}
+	}
+	// Query Contract Success
+	for _, tt := range tests {
+		got := resolve(tt.sns, testSafeHost, "", testRPC, testPublicResolverAddr)
+		if got != tt.want {
+			t.Errorf("Query Contract Success: resolve(%s)'s result: %v, want: %v", tt.sns, got, tt.want)
 		}
 	}
 }
@@ -70,14 +83,25 @@ func TestResolves(t *testing.T) {
 		"0x0000000000000000000000000000000000000000",
 		"0x0000000000000000000000000000000000000000",
 	}
-	got := Resolves(sns)
 
+	// Query Indexer Success
+	got := resolves(sns, testSafeHost, testIndexerHost, "", "")
 	if len(got) != len(want) {
-		t.Errorf("Resolves(%s)'s result: %v, want: %v", sns, got, want)
+		t.Errorf("Query Indexer Success: resolves(%s)'s result: %v, want: %v", sns, got, want)
 	}
 	for i := 0; i < len(want); i++ {
 		if got[i] != want[i] {
-			t.Errorf("Resolves(%s)'s result: %v, want: %v", sns, got, want)
+			t.Errorf("Query Indexer Success: resolves(%s)'s result: %v, want: %v", sns, got, want)
+		}
+	}
+	//Query Contract Success
+	got = resolves(sns, testSafeHost, "", testRPC, testPublicResolverAddr)
+	if len(got) != len(want) {
+		t.Errorf("Query Contract Success: resolves(%s)'s result: %v, want: %v", sns, got, want)
+	}
+	for i := 0; i < len(want); i++ {
+		if got[i] != want[i] {
+			t.Errorf("Query Contract Success: resolves(%s)'s result: %v, want: %v", sns, got, want)
 		}
 	}
 }
@@ -105,10 +129,18 @@ func TestName(t *testing.T) {
 		},
 	}
 
+	// Query Indexer Success
 	for _, tt := range tests {
-		got := Name(tt.addr)
+		got := name(tt.addr, testSafeHost, testIndexerHost, "", "")
 		if got != tt.want {
-			t.Errorf("Resolve(%s)'s result: %v, want: %v", tt.addr, got, tt.want)
+			t.Errorf("Query Indexer Success: resolve(%s)'s result: %v, want: %v", tt.addr, got, tt.want)
+		}
+	}
+	// Query Contract Success
+	for _, tt := range tests {
+		got := name(tt.addr, testSafeHost, "", testRPC, testPublicResolverAddr)
+		if got != tt.want {
+			t.Errorf("Query Contract Success: resolve(%s)'s result: %v, want: %v", tt.addr, got, tt.want)
 		}
 	}
 }
@@ -123,14 +155,25 @@ func TestNames(t *testing.T) {
 	want := []string{
 		"baiyu.seedao", "", "",
 	}
-	got := Names(addr)
 
+	// Query Indexer Success
+	got := names(addr, testSafeHost, testIndexerHost, "", "")
 	if len(got) != len(want) {
-		t.Errorf("Names(%s)'s result: %v, want: %v", addr, got, want)
+		t.Errorf("Query Indexer Success: names(%s)'s result: %v, want: %v", addr, got, want)
 	}
 	for i := 0; i < len(want); i++ {
 		if got[i] != want[i] {
-			t.Errorf("Names(%s)'s result: %v, want: %v", addr, got, want)
+			t.Errorf("Query Indexer Success: names(%s)'s result: %v, want: %v", addr, got, want)
+		}
+	}
+	// Query Contract Success
+	got = names(addr, testSafeHost, "", testRPC, testPublicResolverAddr)
+	if len(got) != len(want) {
+		t.Errorf("Query Contract Success: names(%s)'s result: %v, want: %v", addr, got, want)
+	}
+	for i := 0; i < len(want); i++ {
+		if got[i] != want[i] {
+			t.Errorf("Query Contract Success: names(%s)'s result: %v, want: %v", addr, got, want)
 		}
 	}
 }

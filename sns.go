@@ -9,10 +9,16 @@ import (
 // Resolve sns to address
 // parameter 'sns' example: 'abc.seedao' 'sub.abc.seedao'
 func Resolve(sns string) string {
-	return ResolveWithRPC(sns, rpc)
+	return resolve(sns, safeHost, indexerHost, rpc, publicResolverAddr)
 }
 
+// ResolveWithRPC sns to address with custom rpc
+// parameter 'sns' example: 'abc.seedao' 'sub.abc.seedao'
 func ResolveWithRPC(sns, rpc string) string {
+	return resolve(sns, safeHost, indexerHost, rpc, publicResolverAddr)
+}
+
+func resolve(sns, safeHost, indexerHost, rpc, publicResolverAddr string) (addr string) {
 	if len(sns) == 0 {
 		return "0x0000000000000000000000000000000000000000" // sns is empty
 	}
@@ -29,11 +35,19 @@ func ResolveWithRPC(sns, rpc string) string {
 	return api.Resolve(name, indexerHost, rpc, publicResolverAddr)
 }
 
+// Resolves sns to address batch
+// parameter 'sns' example: ['abc.seedao', 'sub.abc.seedao']
 func Resolves(sns []string) []string {
-	return ResolvesWithRPC(sns, rpc)
+	return resolves(sns, safeHost, indexerHost, rpc, publicResolverAddr)
 }
 
+// ResolvesWithRPC sns to address batch with custom rpc
+// parameter 'sns' example: ['abc.seedao', 'sub.abc.seedao']
 func ResolvesWithRPC(sns []string, rpc string) []string {
+	return resolves(sns, safeHost, indexerHost, rpc, publicResolverAddr)
+}
+
+func resolves(sns []string, safeHost, indexerHost, rpc, publicResolverAddr string) []string {
 	if len(sns) == 0 {
 		return []string{}
 	}
@@ -51,13 +65,19 @@ func ResolvesWithRPC(sns []string, rpc string) []string {
 	return api.Resolves(names, indexerHost, rpc, publicResolverAddr)
 }
 
-// Name address to sns
-// return addr example: 'abc.seedao' 'sub.abc.seedao'
+// Name parse address from sns
+// return addr example: '0x8C913aEc7443FE2018639133398955e0E17FB0C1' '0xc1eE7cB74583D1509362467443C44f1FCa981283'
 func Name(addr string) (sns string) {
-	return NameWithRPC(addr, rpc)
+	return name(addr, safeHost, indexerHost, rpc, publicResolverAddr)
 }
 
+// NameWithRPC parse address from sns with custom rpc
+// return addr example: '0x8C913aEc7443FE2018639133398955e0E17FB0C1' '0xc1eE7cB74583D1509362467443C44f1FCa981283'
 func NameWithRPC(addr, rpc string) (sns string) {
+	return name(addr, safeHost, indexerHost, rpc, publicResolverAddr)
+}
+
+func name(addr, safeHost, indexerHost, rpc, publicResolverAddr string) (sns string) {
 	if len(addr) == 0 {
 		return "" // address is empty
 	}
@@ -74,11 +94,19 @@ func NameWithRPC(addr, rpc string) (sns string) {
 	return name
 }
 
+// Names parse address from sns batch
+// return addr example: ['0x8C913aEc7443FE2018639133398955e0E17FB0C1', '0xc1eE7cB74583D1509362467443C44f1FCa981283']
 func Names(addr []string) []string {
-	return NamesWithRPC(addr, rpc)
+	return names(addr, safeHost, indexerHost, rpc, publicResolverAddr)
 }
 
+// NamesWithRPC parse address from sns batch with custom rpc
+// return addr example: ['0x8C913aEc7443FE2018639133398955e0E17FB0C1', '0xc1eE7cB74583D1509362467443C44f1FCa981283']
 func NamesWithRPC(addr []string, rpc string) []string {
+	return names(addr, safeHost, indexerHost, rpc, publicResolverAddr)
+}
+
+func names(addr []string, safeHost, indexerHost, rpc, publicResolverAddr string) []string {
 	if len(addr) == 0 {
 		return []string{}
 	}
