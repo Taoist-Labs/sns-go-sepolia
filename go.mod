@@ -3,7 +3,7 @@ module github.com/Taoist-Labs/sns-go
 go 1.21
 
 require (
-	github.com/Taoist-Labs/sns-go-api v0.5.1
+	github.com/Taoist-Labs/sns-go-api v0.5.2
 	github.com/Taoist-Labs/sns-go-namehash v0.1.0
 	github.com/Taoist-Labs/sns-go-safe v0.5.1
 )

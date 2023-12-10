@@ -4,8 +4,8 @@ github.com/Microsoft/go-winio v0.6.1 h1:9/kr64B9VUZrLm5YYwbGtUJnMgqWVOdUAXu6Migc
 github.com/Microsoft/go-winio v0.6.1/go.mod h1:LRdKpFKfdobln8UmuiYcKPot9D2v6svN5+sAH+4kjUM=
 github.com/StackExchange/wmi v1.2.1 h1:VIkavFPXSjcnS+O8yTq7NI32k0R5Aj+v39y29VYDOSA=
 github.com/StackExchange/wmi v1.2.1/go.mod h1:rcmrprowKIVzvc+NUiLncP2uuArMWLCbu9SBzvHz7e8=
-github.com/Taoist-Labs/sns-go-api v0.5.1 h1:9NpYyz5gQNKKtXLK8oK6f9lgql64qgCtqxca/9IHo/o=
-github.com/Taoist-Labs/sns-go-api v0.5.1/go.mod h1:kz8hMJDMqRRVZV9fIUxp4GVSE5/uVXkvSjbh0JV5PVY=
+github.com/Taoist-Labs/sns-go-api v0.5.2 h1:I5NGZ0Yn8/V39YNP8CbB9NEaJXZZg96Y21riZC6ZOhw=
+github.com/Taoist-Labs/sns-go-api v0.5.2/go.mod h1:kz8hMJDMqRRVZV9fIUxp4GVSE5/uVXkvSjbh0JV5PVY=
 github.com/Taoist-Labs/sns-go-namehash v0.1.0 h1:5a1PKB7pAtBhb0o64pwrV+enHEfVm7AgipXzy8B59U4=
 github.com/Taoist-Labs/sns-go-namehash v0.1.0/go.mod h1:53v+oKUyKhjZAoASElIc65Y07GVAct80mczBycJoqzA=
 github.com/Taoist-Labs/sns-go-safe v0.5.1 h1:S28GnAU9BhSrplpESQJcsCUzXpi6d0AOGPRdSggk/G0=

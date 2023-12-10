@@ -115,3 +115,32 @@ func names(addr []string, safeHost, indexerHost, rpc, publicResolverAddr string)
 
 	return safe.Safe(sns, safeHost)
 }
+
+// TokenId get sns's ERC721 token id
+// parameter 'sns' example: 'abc.seedao' 'sub.abc.seedao'
+func TokenId(sns string) string {
+	return tokenId(sns, safeHost, indexerHost, rpc, baseRegistrarAddr)
+}
+
+// TokenIdWithRPC get sns's ERC721 token id with custom rpc
+// parameter 'sns' example: 'abc.seedao' 'sub.abc.seedao'
+func TokenIdWithRPC(sns, rpc string) string {
+	return tokenId(sns, safeHost, indexerHost, rpc, baseRegistrarAddr)
+}
+
+func tokenId(sns, safeHost, indexerHost, rpc, baseRegistrarAddr string) (addr string) {
+	if len(sns) == 0 {
+		return "" // sns is empty
+	}
+
+	ok, name := namehash.Normalize(sns)
+	if !ok {
+		return "" // sns is empty
+	}
+
+	if !safe.IsSafe(name, safeHost) {
+		return "" // sns is not safe
+	}
+
+	return api.TokenId(name, indexerHost, rpc, baseRegistrarAddr)
+}

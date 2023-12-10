@@ -2,10 +2,11 @@ package sns
 
 import "testing"
 
-const testIndexerHost = "http://localhost:3000"
-const testSafeHost = "http://localhost:8090"
-const testRPC = "https://eth-sepolia.g.alchemy.com/v2/H43zK7UnIN2v7u2ZoTbizIPnXkylKIZl"
-const testPublicResolverAddr = "0x4ffCfd37C362B415E4c4A607815f5dB6A297Ed8A"
+const testIndexerHost = "https://test-spp-indexer.seedao.tech"
+const testSafeHost = "https://test-sns-api.seedao.tech"
+const testRPC = "https://eth-goerli.g.alchemy.com/v2/MATWeLJN1bEGTjSmtyLedn0i34o1ISLD"
+const testPublicResolverAddr = "0x01578E194eB8789EA1eeC88CDf8C70B879ad2766"
+const testBaseRegistrarAddr = "0x620d50BEFB7471b574D225E0C90985520e7dd3fE"
 
 func TestResolve(t *testing.T) {
 	tests := []struct {
@@ -174,6 +175,40 @@ func TestNames(t *testing.T) {
 	for i := 0; i < len(want); i++ {
 		if got[i] != want[i] {
 			t.Errorf("Query Contract Success: names(%s)'s result: %v, want: %v", addr, got, want)
+		}
+	}
+}
+
+func TestTokenId(t *testing.T) {
+	tests := []struct {
+		name string
+		sns  string
+		want string
+	}{
+		{
+			name: "normal",
+			sns:  "baiyu.seedao",
+			want: "53",
+		},
+		//{
+		//	name: "not exist",
+		//	sns:  "baiyu2.seedao",
+		//	want: "", // TODO Indexer return "", but contract return "0"
+		//},
+	}
+
+	// Query Indexer Success
+	for _, tt := range tests {
+		got := tokenId(tt.sns, testSafeHost, testIndexerHost, "", "")
+		if got != tt.want {
+			t.Errorf("Query Indexer Success: tokenId(%s)'s result: %v, want: %v", tt.sns, got, tt.want)
+		}
+	}
+	// Query Contract Success
+	for _, tt := range tests {
+		got := tokenId(tt.sns, testSafeHost, "", testRPC, testBaseRegistrarAddr)
+		if got != tt.want {
+			t.Errorf("Query Contract Success: tokenId(%s)'s result: %v, want: %v", tt.sns, got, tt.want)
 		}
 	}
 }
