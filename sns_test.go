@@ -5,8 +5,8 @@ import "testing"
 const testIndexerHost = "https://test-spp-indexer.seedao.tech"
 const testSafeHost = "https://test-sns-api.seedao.tech"
 const testRPC = "https://eth-goerli.g.alchemy.com/v2/MATWeLJN1bEGTjSmtyLedn0i34o1ISLD"
-const testPublicResolverAddr = "0x01578E194eB8789EA1eeC88CDf8C70B879ad2766"
-const testBaseRegistrarAddr = "0x620d50BEFB7471b574D225E0C90985520e7dd3fE"
+const testPublicResolverAddr = "0x6A80eA63cFfc6B10B764e1f26348832835520646"
+const testBaseRegistrarAddr = "0x4C53Ff1A6a47E7089e1E727f83e7b7aEFCC9796B"
 
 func TestResolve(t *testing.T) {
 	tests := []struct {
@@ -211,4 +211,16 @@ func TestTokenId(t *testing.T) {
 			t.Errorf("Query Contract Success: tokenId(%s)'s result: %v, want: %v", tt.sns, got, tt.want)
 		}
 	}
+
+	// ---->  <-------
+	// Indexer return "", but contract return "0"
+	got := tokenId("notexists.seedao", testSafeHost, testIndexerHost, "", "")
+	if got != "" {
+		t.Errorf("Query Indexer Success: tokenId(%s)'s result: %v, want: %v", "notexists.seedao", got, "")
+	}
+	got = tokenId("notexists.seedao", testSafeHost, "", testRPC, testBaseRegistrarAddr)
+	if got != "0" {
+		t.Errorf("Query Contract Success: tokenId(%s)'s result: %v, want: %v", "notexists.seedao", got, "0")
+	}
+	// ---->  <-------
 }
