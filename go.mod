@@ -1,4 +1,4 @@
-module github.com/Taoist-Labs/sns-go
+module github.com/Taoist-Labs/sns-go-sepolia
 
 go 1.21
 
