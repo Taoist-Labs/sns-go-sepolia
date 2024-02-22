@@ -1,7 +1,7 @@
 package sns
 
 // Indexer Server Host
-const indexerHost = "https://test-spp-indexer.seedao.tech"
+const indexerHost = ""
 
 // Safe Server Host
 const safeHost = "https://test-sns-api.seedao.tech"
